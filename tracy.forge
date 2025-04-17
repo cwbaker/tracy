@@ -1,0 +1,15 @@
+
+for _, cc in toolsets('^cc.*') do
+    local cc = cc:inherit {
+        warning_level = 0;
+        warnings_as_errors = false;
+    };
+
+    cc:all {
+        cc:StaticLibrary '${lib}/tracy_${platform}_${architecture}' {
+            cc:Cxx '${obj}/%1' {
+                'public/TracyClient.cpp';
+            };
+        };
+    };
+end
